@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "browserify app/js/main.js -o app/bundle.js -t [ babelify --presets [ es2015 ] ]",
-    "watch": "watchify   app/js/main.js -o app/bundle.js -t [ babelify --presets [ es2015 ] ] --debug --verbose"
+    "build": "browserify ./app/js/main.js -o ./app/bundle.js -t [ babelify --presets [ es2015 ] ]",
+    "watch": "watchify   ./app/js/main.js -o ./app/bundle.js -t [ babelify --presets [ es2015 ] ] --debug --verbose"
   },
   "author": "",
   "license": "ISC",

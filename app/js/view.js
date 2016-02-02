@@ -2,6 +2,8 @@
 
 const _ = require('lodash');
 
+const tiles = require('./data/tiles');
+
 const canvas = document.createElement("canvas");
 const ctx = canvas.getContext('2d');
 canvas.width = 512;
@@ -16,7 +18,7 @@ exports.updateView = (background, tiles, entities)=>{
   _.each(tiles, (row, y)=>{
     _.each(row, (tile, x)=>{
       if(tile){
-        // const sprite =
+        debugger
       }
     });
   });

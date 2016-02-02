@@ -14,7 +14,7 @@ store.subscribe(()=>{
 });
 
 var then = new Date();
-var gameLoop = () => {
+const gameLoop = () => {
   const now = new Date();
   // time lapsed, converted to seconds
   const delta = (now - then) / 1000;
