@@ -18,7 +18,6 @@ exports.updateView = (background, tiles, entities)=>{
   _.each(tiles, (row, y)=>{
     _.each(row, (tile, x)=>{
       if(tile){
-        debugger
       }
     });
   });

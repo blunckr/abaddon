@@ -20,18 +20,21 @@ function newState(state, updates){
 exports.reducer = (state = initialState, action) => {
   switch(action.type){
     case 'TICK':
-      var entities = _.map(entities, (entity)=>{
-        entity.speedX += entity.accX * action.delta;
-        entity.speedY += entity.accY * action.delta;
-        entity.x += entity.speedX * action.delta;
-        entity.y += entity.speedY * action.delta;
-        return entity
-      });
-      return newState(state, {entities});
-
+      if(state.entities.length){
+        var entities = _.map(state.entities, (entity)=>{
+          entity.speedX += entity.accX * action.delta;
+          entity.speedY += entity.accY * action.delta;
+          entity.x += entity.speedX * action.delta;
+          entity.y += entity.speedY * action.delta;
+          return entity
+        });
+        return newState(state, {entities});
+      } else {
+        return state;
+      }
     case 'SET_SCENE':
       var {background, tiles, entities} = action.scene;
-      return newState(state, {background, tiles, entities});
+      return newState(state, {background, tiles, entities, sceneName: action.scene.name});
 
     case 'SCENE_LOADING':
       var loadingScenes = _.concat(state.loadingScenes, action.sceneName);

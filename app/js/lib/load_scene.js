@@ -1,16 +1,16 @@
 'use strict';
 const _ = require('lodash');
 
-const {loadImage} = require('./image');
-const sprites = require('../data/sprite_sheets');
+const {loadImage} = require('./images');
 
-exports.loadScene = (scene) => {
+exports.loadScene = (scene, sceneLoading, sceneLoaded) => {
+  sceneLoading(scene.name);
   const promises = _.chain(scene.tiles)
     .flatten()
     .compact()
     .map((tile)=>tile.img)
     .uniq()
-    .map((img)=>loadImage(sprites[img]))
+    .map((img)=>loadImage(img))
     .value();
-  return Promise.all(promises);
+  Promise.all(promises).then(()=> sceneLoaded(scene.name));
 };
