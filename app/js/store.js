@@ -2,7 +2,20 @@
 
 const _ = require('lodash');
 
-const initialState = {background: '#000', tiles: [], entities: [], buttons: [], images: []};
+const initialState = {
+  sceneName: null,
+  background: '#000',
+  tiles: [],
+  entities: [],
+  buttons: [],
+  images: [],
+  loadingScenes: [],
+  loadedScenes: []
+};
+
+function newState(state, updates){
+  return _.assign({}, state, updates);
+}
 
 exports.reducer = (state = initialState, action) => {
   switch(action.type){
@@ -14,19 +27,28 @@ exports.reducer = (state = initialState, action) => {
         entity.y += entity.speedY * action.delta;
         return entity
       });
-      return Object.assign({}, state, {entities});
+      return newState(state, {entities});
 
     case 'SET_SCENE':
       var {background, tiles, entities} = action.scene;
-      return Object.assign({}, state, {background, tiles, entities});
+      return newState(state, {background, tiles, entities});
+
+    case 'SCENE_LOADING':
+      var loadingScenes = _.concat(state.loadingScenes, action.sceneName);
+      return newState(state, {loadingScenes});
+
+    case 'SCENE_LOADED':
+      var loadingScenes = _.without(state.loadingScenes, action.sceneName);
+      var loadedScenes = _.concat(state.loadedScenes, action.sceneName);
+      return newState(state, {loadingScenes, loadedScenes});
 
     case 'BUTTON_DOWN':
       var buttons = _.concat(state.buttons, action.button);
-      return Object.assign({}, state, {buttons});
+      return newState(state, {buttons});
 
     case 'BUTTON_UP':
       var buttons = _.without(state.buttons, action.button);
-      return Object.assign({}, state, {buttons});
+      return newState(state, {buttons});
 
     default:
       return state;

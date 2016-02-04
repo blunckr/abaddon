@@ -8,7 +8,6 @@ exports.testScene = () =>({
     [rb, nu, rb],
     [rb, rb, rb]
   ],
-  entities: [
-
-  ],
+  entities: [],
+  background: '#9290FF'
 });
