@@ -6,7 +6,7 @@ const {reducer} = require('./store');
 const rawActions = require('./actions');
 const {updateView} = require('./view');
 
-const {loadScene} = require('./lib/load_scene');
+const {loadImages} = require('./lib/images.js');
 
 const {testScene} = require('./scenes/test');
 
@@ -33,6 +33,7 @@ const gameLoop = () => {
 requestAnimationFrame(gameLoop);
 
 // this will go somewhere else eventually
-var firstScene = testScene();
-loadScene(firstScene, actions.sceneLoading, actions.sceneLoaded);
-actions.setScene(testScene());
+loadImages().then(()=>{
+  var firstScene = testScene();
+  actions.setScene(testScene());
+});

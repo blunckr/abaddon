@@ -9,8 +9,6 @@ const initialState = {
   entities: [],
   buttons: [],
   images: [],
-  loadingScenes: [],
-  loadedScenes: []
 };
 
 function newState(state, updates){
@@ -35,15 +33,6 @@ exports.reducer = (state = initialState, action) => {
     case 'SET_SCENE':
       var {background, tiles, entities} = action.scene;
       return newState(state, {background, tiles, entities, sceneName: action.scene.name});
-
-    case 'SCENE_LOADING':
-      var loadingScenes = _.concat(state.loadingScenes, action.sceneName);
-      return newState(state, {loadingScenes});
-
-    case 'SCENE_LOADED':
-      var loadingScenes = _.without(state.loadingScenes, action.sceneName);
-      var loadedScenes = _.concat(state.loadedScenes, action.sceneName);
-      return newState(state, {loadingScenes, loadedScenes});
 
     case 'BUTTON_DOWN':
       var buttons = _.concat(state.buttons, action.button);

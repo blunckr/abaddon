@@ -1,33 +1,23 @@
 'use strict';
 
 const _ = require('lodash');
+const images = require('../data/sprite_sheets.js');
+var cache = {};
 
-const cache = {};
-
-exports.loadImage = (url, cb) => {
-  return new Promise((resolve, reject)=>{
-    if(cache[url]){
-      if (cache[url].ready){
-        resolve();
-      } else {
-        cache[url].resolvers.push(resolve);
-      }
-    } else {
+exports.loadImages = ()=>{
+  const promises = _.map(images, (url)=>{
+    return new Promise((resolve, reject)=>{
       const img = new Image();
-      cache[url] = {
-        img: img,
-        resolvers: [resolve],
-        ready: false
-      }
+      cache[url] = img;
       img.onload = ()=>{
-        cache[url].ready = true;
-        _.each(cache[url].resolvers, (r) => r());
+        resolve();
       };
       img.src=url;
-    }
+    })
   });
+  return Promise.all(promises);
 }
 
-exports.getImage = (url) => {
-  return cache[url].img;
+exports.getImage = (url)=>{
+  return cache[url];
 }

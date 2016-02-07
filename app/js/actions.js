@@ -18,13 +18,3 @@ exports.setScene = (scene)=>({
   type: 'SET_SCENE',
   scene
 });
-
-exports.sceneLoading = (sceneName)=>({
-  type: 'SCENE_LOADING',
-  sceneName
-});
-
-exports.sceneLoaded = (sceneName)=>({
-  type: 'SCENE_LOADED',
-  sceneName
-});
