@@ -18,10 +18,5 @@
     "babelify": "^7.2.0",
     "browserify": "^13.0.0",
     "watchify": "^3.7.0"
-  },
-  "eslintConfig": {
-    "env": {
-      "es6": true
-    }
   }
 }

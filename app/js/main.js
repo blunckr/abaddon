@@ -25,7 +25,7 @@ const gameLoop = () => {
   const now = new Date();
   // time lapsed, converted to seconds
   const delta = (now - then) / 1000;
-  actions.tick(delta)
+  actions.tick(delta);
   then = now;
   requestAnimationFrame(gameLoop);
 };
@@ -34,6 +34,5 @@ requestAnimationFrame(gameLoop);
 
 // this will go somewhere else eventually
 loadImages().then(()=>{
-  var firstScene = testScene();
   actions.setScene(testScene());
 });

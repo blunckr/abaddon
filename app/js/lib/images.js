@@ -13,11 +13,11 @@ exports.loadImages = ()=>{
         resolve();
       };
       img.src=url;
-    })
+    });
   });
   return Promise.all(promises);
-}
+};
 
 exports.getImage = (url)=>{
   return cache[url];
-}
+};
