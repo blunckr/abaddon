@@ -21,6 +21,7 @@ exports.reducer = (state = initialState, action) => {
     case 'TICK':
       if(state.entities.length){
         entities = _.map(state.entities, (entity)=>{
+          return entity
           entity.speedX += entity.accX * action.delta;
           entity.speedY += entity.accY * action.delta;
           entity.x += entity.speedX * action.delta;

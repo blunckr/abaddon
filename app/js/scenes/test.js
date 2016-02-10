@@ -1,14 +1,24 @@
 'use strict';
 
-const rb = require('../data/tiles').rockBrown();
+const tiles = require('../data/tiles');
+const {player} = require('../data/entities');
+
+const rb = tiles.rockBrown();
+const bl = tiles.rockBlue();
 const nu = null;
 exports.testScene = () =>({
   name: 'TEST_SCENE',
   tiles: [
-    [rb, rb, rb],
-    [rb, nu, rb],
+    [nu, bl, nu],
+    [nu, nu, nu],
     [rb, rb, rb]
   ],
-  entities: [],
+  entities: [
+    {
+      sprite: player(),
+      x: 0,
+      y: 0
+    }
+  ],
   background: '#9290FF'
 });

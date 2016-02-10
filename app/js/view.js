@@ -11,8 +11,8 @@ document.body.appendChild(canvas);
 
 const sHeight = 16;
 const sWidth = 16;
-const dHeight = 32;
-const dWidth = 32;
+const dHeight = 16;
+const dWidth = 16;
 
 exports.updateView = (background, tiles, entities)=>{
   ctx.rect(0, 0, canvas.width, canvas.height);
@@ -26,12 +26,24 @@ exports.updateView = (background, tiles, entities)=>{
         // void ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
         ctx.drawImage(
           img,
-          tile.posX, tile.posY,
+          tile.x * sWidth, tile.y * sHeight,
           sWidth, sHeight,
           x * dWidth, y * dHeight,
           dWidth, dHeight
         );
       }
     });
+  });
+
+  _.each(entities, (entity)=>{
+    const img = getImage(entity.sprite.img);
+
+    ctx.drawImage(
+      img,
+      entity.sprite.x, entity.sprite.y,
+      entity.sprite.width, entity.sprite.height,
+      entity.x, entity.y,
+      dWidth, dHeight
+    );
   });
 };
