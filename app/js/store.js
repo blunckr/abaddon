@@ -21,11 +21,9 @@ exports.reducer = (state = initialState, action) => {
     case 'TICK':
       if(state.entities.length){
         entities = _.map(state.entities, (entity)=>{
-          return entity
-          entity.speedX += entity.accX * action.delta;
-          entity.speedY += entity.accY * action.delta;
-          entity.x += entity.speedX * action.delta;
-          entity.y += entity.speedY * action.delta;
+          if(entity.tick){
+            entity = entity.tick(entity, _.without(state.entities, entity), state.tiles, action.delta);
+          }
           return entity;
         });
         return newState(state, {entities});

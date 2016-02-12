@@ -36,12 +36,10 @@ exports.updateView = (background, tiles, entities)=>{
   });
 
   _.each(entities, (entity)=>{
-    const img = getImage(entity.sprite.img);
-
     ctx.drawImage(
-      img,
-      entity.sprite.x, entity.sprite.y,
-      entity.sprite.width, entity.sprite.height,
+      getImage(entity.img),
+      entity.spriteX, entity.spriteY,
+      entity.width, entity.height,
       entity.x, entity.y,
       dWidth, dHeight
     );

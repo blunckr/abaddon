@@ -14,11 +14,7 @@ exports.testScene = () =>({
     [rb, rb, rb]
   ],
   entities: [
-    {
-      sprite: player(),
-      x: 0,
-      y: 0
-    }
+    player({x: 0, y: 0})
   ],
   background: '#9290FF'
 });
