@@ -40,8 +40,11 @@ exports.updateView = (background, tiles, entities)=>{
       getImage(entity.img),
       entity.spriteX, entity.spriteY,
       entity.width, entity.height,
-      entity.x, entity.y,
+      parseInt(entity.x), parseInt(entity.y),
       dWidth, dHeight
     );
   });
 };
+
+exports.dHeight = dHeight;
+exports.dWidth = dWidth;

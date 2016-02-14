@@ -9,12 +9,13 @@ const nu = null;
 exports.testScene = () =>({
   name: 'TEST_SCENE',
   tiles: [
-    [nu, bl, nu],
-    [nu, nu, nu],
-    [rb, rb, rb]
+    [rb, nu, nu, nu, nu, nu, bl, bl],
+    [rb, nu, nu, nu, nu, nu, rb, rb],
+    [rb, rb, rb, rb, rb, rb, rb, rb],
+    [rb, rb, rb, rb, rb, rb, rb, rb]
   ],
   entities: [
-    player({x: 0, y: 0})
+    player({x: 16, y: 1})
   ],
   background: '#9290FF'
 });
