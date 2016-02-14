@@ -27,11 +27,11 @@ exports.player = (params) => {
     spriteY: 32,
     height: 16,
     width: 16,
-    speedY: 0,
+    speedY: 50,
     speedX: 50,
     img: marioPlayers,
     tick: (entity, entities, tiles, delta) => {
-      var index, nextXTiles;
+      var index, nextXTiles, nextYTiles;
       var nextX = entity.x + entity.speedX * delta;
       var nextY = entity.y + entity.speedY * delta;
 
@@ -41,34 +41,60 @@ exports.player = (params) => {
       var gridLeft = gridPosX(entity.x);
       var gridRight = gridPosX(right);
 
-      var topTiles = tiles[gridPosY(entity.y)];
-      var bottomTiles = tiles[gridPosY(bottom)];
+      var gridTop = gridPosY(entity.y);
+      var gridBottom = gridPosY(bottom);
 
-      var allXTiles;
-      if(topTiles != bottomTiles){
-        allXTiles = [topTiles, bottomTiles];
-      } else {
-        allXTiles = [topTiles];
-      }
-      if(entity.speedX > 0){
-        nextXTiles = _.map(allXTiles, (row)=>{
-          index = _.findIndex(row, (tile, i)=>(tile !== null && i > gridRight));
-          return (index - 1) * dWidth;
-        });
-        var min = _.min(_.concat([nextX], nextXTiles));
-        entity.x = min;
-      } else if(entity.speedX < 0){
-        nextXTiles = _.map(allXTiles, (row)=>{
-          index = _.findIndex(row, (tile, i)=>(tile !== null && i < gridLeft));
-          return (index + 1) * dWidth;
-        });
-        entity.x = _.max(_.concat([nextX], nextXTiles));
+      if(entity.speedX != 0){
+        var topTiles = tiles[gridTop];
+        var bottomTiles = tiles[gridBottom];
 
+        var allXTiles;
+        if(topTiles != bottomTiles){
+          allXTiles = [topTiles, bottomTiles];
+        } else {
+          allXTiles = [topTiles];
+        }
+        if(entity.speedX > 0){
+          nextXTiles = _.map(allXTiles, (row)=>{
+            index = _.findIndex(row, (tile, i)=>(tile !== null && i > gridRight));
+            return (index - 1) * dWidth; // subtract one width to get the top of the tile
+          });
+          entity.x = _.min(_.concat([nextX], nextXTiles));
+        } else {
+          nextXTiles = _.map(allXTiles, (row)=>{
+            index = _.findIndex(row, (tile, i)=>(tile !== null && i < gridLeft));
+            return (index + 1) * dWidth;
+          });
+          entity.x = _.max(_.concat([nextX], nextXTiles));
+        }
       }
-      // entity.speedX += entity.accX * delta;
-      // entity.speedY += entity.accY * delta;
-      // entity.x += entity.speedX * delta;
-      entity.y += entity.speedY * delta;
+
+      if(entity.speedY != 0){
+        var leftTiles = _.map(tiles, gridLeft);
+        var rightTiles = _.map(tiles, gridRight);
+
+        var allYTiles;
+        if(leftTiles != rightTiles){
+          allYTiles = [leftTiles, rightTiles];
+        } else {
+          allYTiles = [leftTiles];
+        }
+        if(entity.speedY > 0) {
+          nextYTiles = _.map(allYTiles, (row)=>{
+            index = _.findIndex(row, (tile, i)=>(tile !== null && i > gridBottom));
+            return (index - 1) * dHeight;
+          });
+          entity.y = _.min(_.concat([nextY], nextYTiles));
+        } else {
+          nextYTiles = _.map(allYTiles, (row)=>{
+            index = _.findIndex(row, (tile, i)=>(tile !== null && i < gridTop));
+            return (index + 1) * dHeight;
+          });
+          entity.y = _.max(_.concat([nextY], nextYTiles));
+        }
+      }
+      entity.speedX += entity.accX * delta;
+      entity.speedY += entity.accY * delta;
       return entity;
     }
   };
