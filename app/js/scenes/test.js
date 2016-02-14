@@ -9,7 +9,7 @@ const nu = null;
 exports.testScene = () =>({
   name: 'TEST_SCENE',
   tiles: [
-    [rb, nu, nu, nu, nu, nu, bl, bl],
+    [rb, nu, nu, nu, nu, nu, nu, bl],
     [rb, nu, nu, nu, nu, nu, rb, rb],
     [rb, rb, rb, rb, rb, rb, rb, rb],
     [rb, rb, rb, rb, rb, rb, rb, rb]

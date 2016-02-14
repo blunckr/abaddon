@@ -28,18 +28,18 @@ exports.player = (params) => {
     height: 16,
     width: 16,
     speedY: 0,
-    speedX: 10,
+    speedX: 50,
     img: marioPlayers,
     tick: (entity, entities, tiles, delta) => {
-      delta = .1;
       var index, nextXTiles;
       var nextX = entity.x + entity.speedX * delta;
       var nextY = entity.y + entity.speedY * delta;
 
-      var right = nextX + entity.width - 1;
+      var right = entity.x + entity.width - 1;
+      var bottom = entity.y + entity.height - 1;
+
       var gridLeft = gridPosX(entity.x);
       var gridRight = gridPosX(right);
-      var bottom = nextY + entity.height - 1;
 
       var topTiles = tiles[gridPosY(entity.y)];
       var bottomTiles = tiles[gridPosY(bottom)];
@@ -52,15 +52,15 @@ exports.player = (params) => {
       }
       if(entity.speedX > 0){
         nextXTiles = _.map(allXTiles, (row)=>{
-          index = _.findIndex(row, (tile, i)=>(tile !== null && i >= gridRight));
+          index = _.findIndex(row, (tile, i)=>(tile !== null && i > gridRight));
           return (index - 1) * dWidth;
         });
         var min = _.min(_.concat([nextX], nextXTiles));
         entity.x = min;
-      } else {
+      } else if(entity.speedX < 0){
         nextXTiles = _.map(allXTiles, (row)=>{
           index = _.findIndex(row, (tile, i)=>(tile !== null && i < gridLeft));
-          return index * dWidth;
+          return (index + 1) * dWidth;
         });
         entity.x = _.max(_.concat([nextX], nextXTiles));
 
