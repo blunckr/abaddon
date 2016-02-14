@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "browserify ./app/js/main.js -o ./app/bundle.js -t [ babelify --presets [ es2015 ] ]",
-    "watch": "watchify   ./app/js/main.js -o ./app/bundle.js -t [ babelify --presets [ es2015 ] ]  --verbose"
+    "watch": "watchify   ./app/js/main.js -o ./app/bundle.js -t [ babelify --presets [ es2015 ] ]  --verbose --debug"
   },
   "author": "",
   "license": "ISC",

@@ -1,2 +1,3 @@
-scene can be set safely even if sprites aren't loaded
-just can't render it yet
+# An attempt to build a game with redux
+
+run it with `npm run watch`
