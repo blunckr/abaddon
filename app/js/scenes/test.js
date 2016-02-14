@@ -15,7 +15,7 @@ exports.testScene = () =>({
     [rb, rb, rb, rb, rb, rb, rb, rb]
   ],
   entities: [
-    player({x: 16, y: 1})
+    player({x: 40, y: 1})
   ],
   background: '#9290FF'
 });

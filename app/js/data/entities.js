@@ -31,11 +31,13 @@ exports.player = (params) => {
     speedX: 10,
     img: marioPlayers,
     tick: (entity, entities, tiles, delta) => {
-      var index;
+      delta = .1;
+      var index, nextXTiles;
       var nextX = entity.x + entity.speedX * delta;
       var nextY = entity.y + entity.speedY * delta;
 
       var right = nextX + entity.width - 1;
+      var gridLeft = gridPosX(entity.x);
       var gridRight = gridPosX(right);
       var bottom = nextY + entity.height - 1;
 
@@ -49,11 +51,19 @@ exports.player = (params) => {
         allXTiles = [topTiles];
       }
       if(entity.speedX > 0){
-        var nextXTiles = _.map(allXTiles, (row)=>{
-          index = _.findIndex(row, (tile, i)=>(tile !== null && i > gridRight));
+        nextXTiles = _.map(allXTiles, (row)=>{
+          index = _.findIndex(row, (tile, i)=>(tile !== null && i >= gridRight));
+          return (index - 1) * dWidth;
+        });
+        var min = _.min(_.concat([nextX], nextXTiles));
+        entity.x = min;
+      } else {
+        nextXTiles = _.map(allXTiles, (row)=>{
+          index = _.findIndex(row, (tile, i)=>(tile !== null && i < gridLeft));
           return index * dWidth;
         });
-        entity.x = _.min(_.concat([nextX], nextXTiles));
+        entity.x = _.max(_.concat([nextX], nextXTiles));
+
       }
       // entity.speedX += entity.accX * delta;
       // entity.speedY += entity.accY * delta;
