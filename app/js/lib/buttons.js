@@ -4,6 +4,14 @@ const translate = (keyCode)=>{
   switch(keyCode){
     case 32:
       return 'SPACE';
+    case 37:
+      return 'LEFT';
+    case 38:
+      return 'UP';
+    case 39:
+      return 'RIGHT';
+    case 40:
+      return 'DOWN';
     default:
       return false;
   }

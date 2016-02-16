@@ -22,7 +22,7 @@ exports.reducer = (state = initialState, action) => {
       if(state.entities.length){
         entities = _.map(state.entities, (entity)=>{
           if(entity.tick){
-            entity = entity.tick(entity, _.without(state.entities, entity), state.tiles, action.delta);
+            entity = entity.tick(entity, _.without(state.entities, entity), state.tiles, state.buttons, action.delta);
           }
           return entity;
         });
@@ -36,9 +36,12 @@ exports.reducer = (state = initialState, action) => {
       return newState(state, {background, tiles, entities, sceneName: action.scene.name});
 
     case 'BUTTON_DOWN':
-      buttons = _.concat(state.buttons, action.button);
-      return newState(state, {buttons});
-
+      console.log(state.buttons, action.button);
+      if(!_.includes(state.buttons, action.button)){
+        buttons = _.concat(state.buttons, action.button);
+        return newState(state, {buttons});
+      }
+      return state;
     case 'BUTTON_UP':
       buttons = _.without(state.buttons, action.button);
       return newState(state, {buttons});

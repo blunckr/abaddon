@@ -28,9 +28,9 @@ exports.player = (params) => {
     height: 16,
     width: 16,
     speedY: 50,
-    speedX: 50,
+    speedX: 0,
     img: marioPlayers,
-    tick: (entity, entities, tiles, delta) => {
+    tick: (entity, entities, tiles, buttons, delta) => {
       var index, nextXTiles, nextYTiles;
       var nextX = entity.x + entity.speedX * delta;
       var nextY = entity.y + entity.speedY * delta;
