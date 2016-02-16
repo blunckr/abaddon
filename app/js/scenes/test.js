@@ -10,9 +10,13 @@ exports.testScene = () =>({
   name: 'TEST_SCENE',
   tiles: [
     [rb, rb, rb, rb, rb, rb, rb, rb],
-    [rb, nu, nu, nu, nu, nu, nu, bl],
-    [rb, nu, nu, nu, nu, nu, rb, rb],
-    [rb, rb, rb, rb, rb, rb, rb, rb],
+    [rb, nu, nu, nu, nu, nu, nu, rb],
+    [rb, nu, nu, nu, nu, nu, nu, rb],
+    [rb, nu, nu, nu, nu, nu, nu, rb],
+    [rb, nu, nu, nu, nu, nu, nu, rb],
+    [rb, nu, nu, nu, nu, nu, nu, rb],
+    [rb, nu, nu, nu, nu, nu, nu, rb],
+    [rb, nu, nu, nu, nu, nu, nu, rb],
     [rb, rb, rb, rb, rb, rb, rb, rb]
   ],
   entities: [

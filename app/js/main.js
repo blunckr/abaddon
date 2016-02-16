@@ -5,9 +5,8 @@ const {createStore, bindActionCreators} = require('redux');
 const {reducer} = require('./store');
 const rawActions = require('./actions');
 const {updateView} = require('./view');
-
 const {loadImages} = require('./lib/images.js');
-
+const {bindButtons} = require('./lib/buttons.js');
 const {testScene} = require('./scenes/test');
 
 const store = createStore(reducer);
@@ -31,6 +30,8 @@ const gameLoop = () => {
 };
 
 requestAnimationFrame(gameLoop);
+
+bindButtons(actions.buttonDown, actions.buttonUp);
 
 // this will go somewhere else eventually
 loadImages().then(()=>{
