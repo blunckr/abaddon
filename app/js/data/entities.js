@@ -32,6 +32,22 @@ exports.player = (params) => {
     img: marioPlayers,
     tick: (entity, entities, tiles, buttons, delta) => {
       var index, nextXTiles, nextYTiles;
+
+      entity.speedX += entity.accX * delta;
+      entity.speedY += entity.accY * delta;
+      if(_.includes(buttons, 'LEFT')){
+        entity.speedX = -50;
+      } else if (_.includes(buttons, 'RIGHT')){
+        entity.speedX = 50;
+      } else {
+        entity.speedX = 0;
+      }
+
+      if(_.includes(buttons, 'SPACE')){
+        entity.speedY = -100;
+        entity.accY = 300;
+      }
+
       var nextX = entity.x + entity.speedX * delta;
       var nextY = entity.y + entity.speedY * delta;
 
@@ -93,8 +109,6 @@ exports.player = (params) => {
           entity.y = _.max(_.concat([nextY], nextYTiles));
         }
       }
-      entity.speedX += entity.accX * delta;
-      entity.speedY += entity.accY * delta;
       return entity;
     }
   };

@@ -36,7 +36,6 @@ exports.reducer = (state = initialState, action) => {
       return newState(state, {background, tiles, entities, sceneName: action.scene.name});
 
     case 'BUTTON_DOWN':
-      console.log(state.buttons, action.button);
       if(!_.includes(state.buttons, action.button)){
         buttons = _.concat(state.buttons, action.button);
         return newState(state, {buttons});
